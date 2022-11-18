@@ -32,6 +32,26 @@ app.use(express.json({extended:false})); /*This option allows to choose between 
                                           The “extended” syntax allows for rich objects and arrays to be encoded into the URL-encoded format, allowing for a JSON-like experience with URL-encoded. */
 
 // TO DO: aici adaug middleware - 401 daca nu e autentificat resp nu e ok tokenul
+app.get('/*', async (req, res, next) => {    
+    const cookies = req.cookies;
+    console.log("Cookies: ",cookies);
+    const token = cookies.LoginToken;
+    console.log("token is ",token);
+    if(!token) {
+        res.status(404).json({message: "No token found!"});
+    }
+
+    jwt.verify(String(token),process.env.JWT_SECRET_KEY, (err,user) => {
+        //console.log(user);
+        if(err) {
+            return res.status(400).json({message: "Invalid token", token})
+        }
+        //console.log(user.id);
+        req.id = user.id;
+    })
+    next();
+});
+
 //app.use('/api/user', user);
 
 mongoose.connect(process.env.DATABASE_URI) // conect to mongodb

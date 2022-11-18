@@ -166,25 +166,25 @@ router.delete('/:id', (req,res) => {
 // 	res.json(listItems);
 // });
 
-router.get('/', async (req, res, next) => {    
-    const cookies = req.cookies;
-    console.log("Cookies: ",cookies);
-    const token = cookies.LoginToken;
-    console.log("token is ",token);
-    if(!token) {
-        res.status(404).json({message: "No token found!"});
-    }
+// router.get('/', async (req, res, next) => {    
+//     const cookies = req.cookies;
+//     console.log("Cookies: ",cookies);
+//     const token = cookies.LoginToken;
+//     console.log("token is ",token);
+//     if(!token) {
+//         res.status(404).json({message: "No token found!"});
+//     }
 
-    jwt.verify(String(token),process.env.JWT_SECRET_KEY, (err,user) => {
-        //console.log(user);
-        if(err) {
-            return res.status(400).json({message: "Invalid token", token})
-        }
-        //console.log(user.id);
-        req.id = user.id;
-    })
-    next();
-});
+//     jwt.verify(String(token),process.env.JWT_SECRET_KEY, (err,user) => {
+//         //console.log(user);
+//         if(err) {
+//             return res.status(400).json({message: "Invalid token", token})
+//         }
+//         //console.log(user.id);
+//         req.id = user.id;
+//     })
+//     next();
+// });
 
 router.get('/', async (req, res, next) => {
     const userId = req.id;
@@ -197,6 +197,7 @@ router.get('/', async (req, res, next) => {
     if (!user) {
         return res.status(404).json({message: "User not found"})
     }
+	console.log(user)
     return res.status(200).json({user});
 })
 
