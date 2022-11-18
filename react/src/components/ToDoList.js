@@ -72,7 +72,7 @@ class ToDoList extends Component {
 		}).catch(err => console.log(err));
 		console.log(res)
 		const data = await res.data;
-		console.log(data)
+		console.log(data);
 		return data
 	}
 	
