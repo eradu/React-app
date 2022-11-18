@@ -1,0 +1,58 @@
+@import "../Variables/Variables.scss";
+
+.login-container{
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    h1 {
+        font-size: 3em;
+        font-weight: 600;
+        color: #b0b0b0;
+        text-shadow: -2px -2px 2px rgb(255 255 255 / 47%), 2px 2px 2px rgb(0 0 0 / 13%);
+    }
+
+    .username-error {
+        font-size: 1.6em;
+        color: red;
+        margin-bottom: 1em;
+    }
+  
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        .reg-input, .reg-btn {
+            padding: 0.5em;
+            height: 100%;
+            width: 16em;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 0.6em;
+            outline: none;
+            background: transparent;
+            box-shadow: inset -5px -5px 5px rgb(255 255 255 / 47%), inset 5px 5px 5px rgb(0 0 0 / 13%);
+        }
+        & :focus {
+            outline: none;
+        }
+
+        .reg-btn {
+            width: 150px;
+            margin-left: 20px;
+            box-shadow: inset 5px 5px 5px rgb(255 255 255 / 47%), inset -5px -5px 5px rgb(0 0 0 / 13%);
+            color: #878787;
+
+            &:active {
+                box-shadow: inset -5px -5px 5px #fff7,
+                          inset 5px 5px 5px #0002;
+              }
+        }
+
+    }
+    
+  }

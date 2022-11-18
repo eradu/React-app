@@ -1,0 +1,44 @@
+@import "../Variables/Variables.scss";
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+  font-size: 1em;
+ 
+  #root {
+    height: 100vh;
+
+    .App {
+      background-color: $bodyColor;
+      min-height: 100%;
+
+      .todo-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        margin:0 auto;
+        border-radius: 2em;
+        box-shadow: 10px 10px 15px #0002,
+                    -10px -10px 15px #fff7;
+        width: fit-content;
+        margin-top: 90px;
+      } 
+      
+      .about {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+
+      }
+    }
+  }
+}
+
+
+
+

@@ -1,0 +1,70 @@
+@import "../Variables/Variables.scss";
+@import "../Styles/Mobile.scss";
+
+
+
+.listHandler {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    font-size: 3em;
+    font-weight: 600;
+    color: $greyColorDark;
+    text-shadow:  -2px -2px 2px #fff7,
+                   2px 2px 2px #0002;
+  }
+  
+  .app-input {
+    margin: 0 20px;
+
+    .addToDo {
+      margin-bottom: 1em;
+      border-radius: 0.2em;
+  
+      .add-input, .add-btn, .edit-btn {
+        padding: 0.5em;
+        height: 100%;
+        width: 16em;
+        font-size: 1.2em;
+        border: none;
+        border-radius: 0.6em ;
+        outline: none;
+        background: transparent;
+        box-shadow: inset -5px -5px 5px #fff7,
+                    inset 5px 5px 5px #0002;
+      }
+  
+      .add-btn, .edit-btn {
+        width: 150px;
+        margin-left: 20px;
+        box-shadow: inset 5px 5px 5px #fff7,
+                    inset -5px -5px 5px #0002;
+        color: $greyColorIntense;
+
+        &:active {
+          box-shadow: inset -5px -5px 5px #fff7,
+                    inset 5px 5px 5px #0002;
+        }
+      }
+
+      .add-btn:hover {
+        cursor: pointer;
+        background-color: $greyColorIntense;
+        color: $greyColor;
+      }
+
+      .edit-btn {
+        background-color: $greenColor;
+
+        &:hover {
+          cursor: pointer;
+          background-color: $greenColorIntense;
+          color: $greyColor;
+        }
+      }
+    }
+  }
+}
+

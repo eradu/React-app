@@ -1,0 +1,35 @@
+@import "../Variables/Variables.scss";
+
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+  border-bottom: 2px solid $greyColorIntense;
+  justify-content: space-between;
+
+  h1 {
+    color: $greyColorIntense;
+    margin: 0;
+  }
+
+  .links  {
+    
+
+     a {
+      margin-left: 16px;
+      text-decoration: none;
+      padding: 6px;
+      color: $greyColorDark;
+
+      &:hover{
+        color: $greyColorIntense;
+      }
+      &.active {
+        color: $blackColor;
+      }
+  
+     }
+  }
+}

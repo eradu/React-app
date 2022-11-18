@@ -1,0 +1,47 @@
+@import "../Variables/Variables.scss";
+
+.welcome-container {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    h1 {
+        font-size: 3em;
+        font-weight: 600;
+        color: $greyColorDark;
+        text-shadow: -2px -2px 2px rgb(255 255 255 / 47%), 2px 2px 2px rgb(0 0 0 / 13%);
+        text-transform: capitalize;
+    }
+
+    .logout-btn {
+        width: 79px;
+        margin-left: 20px;
+        box-shadow: inset 5px 5px 5px rgb(255 255 255 / 47%), inset -5px -5px 5px rgb(0 0 0 / 13%);
+        color: $greyColorIntense;
+        padding: 0.5em;
+        border: none;
+        border-radius: 0.6em;
+        outline: none;
+        font-size: 1.1em;
+
+        &:hover {
+            cursor: pointer;
+            background-color: $greyColorIntense;
+            color: $greyColor;
+        }
+
+        &:active {
+            box-shadow: inset -5px -5px 5px #fff7,
+                      inset 5px 5px 5px #0002;
+          }
+    }
+
+    a {
+        text-decoration: none;
+        font-size: 1.6em;
+        margin-bottom: 1.5rem;
+        color: $greyColorIntense;
+    }
+}
