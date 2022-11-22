@@ -70,10 +70,10 @@ class ToDoList extends Component {
 		const res = await axios.get(url, {
 			withCredentials: true
 		}).catch(err => console.log(err));
-		console.log(res)
+		console.log(res);
 		const data = await res.data;
 		console.log(data);
-		return data
+		return data;
 	}
 	
 	sendRequest().then((data) => {})
@@ -117,41 +117,60 @@ class ToDoList extends Component {
     // clearInterval(this.timerID);  // we clearInterval that was set in Counter component with setInterval; we need to unmount the count function when the Counter component was unmount, else the count function will continuu to be executed
   }
   
-
   addElementToList() {
-    // Function that modify the initial state for listItems: add a new element to listItems array which is the value added by the user to the input
-	//const {username, password} = this.context;
-	fetch(url, {
-      // fetch method provides an easy logical way to fetch resources asynchronously across the network and return a promise. Post request to add item/element to the array in the express server
-		method: "POST",
-		headers: {
-			// for post is needed to provide the headers object whit the content type application json
-			"Content-Type": "application/json",
-			Authorization: `${this.context[0].username} : ${this.context[0].password}` // use username and password from context 
-      	},
-      	body: JSON.stringify({
-			// in POST request, variables below are sent in the body as key-value pairs
+	axios.post(url, {
+		withCredentials: true,
+		data: {
 			title: this.state.input,
 			id: this.state.id,
 			key: this.state.id,
 			completed: this.state.completed,
 			editInput: this.state.editInput
-      	}),
-    })
-		.then((res) => res.json()) // fetch return a propmise that is resoved with response (res) object; to extract the json body content from the response object, we use json() method
-		.then((listItems) => {
-			// which return a second promise that resolves with the result of parsing the response body text as JSON
-			this.setState({
-			// with "this.setState" we change the state for the app: we set the state for listitems array, updateing it with the value added in the input by the user
-			listItems: listItems   , //  adding the new todo item in the array
-			input: "", // reset the input to empty string: we clear the value of the input after the user click on add button
-			id: Date.now(), // set new id
-			completed: false, // set completed attribute to false
-			editInput: false // set editInpute attribute to false
-			});
-			console.log(typeof listItems);
-		})
-      	.catch((error) => console.error("Error " + error)); // here we handeling fetch Promise errors
+		}
+	}).then((res) => res.json()) 
+	.then((listItems) => {
+		this.setState({
+			listItems: listItems, 
+			input: "", 
+			id: Date.now(), 
+			completed: false, 
+			editInput: false 
+		});
+	}).catch((error) => console.error("Error " + error));
+
+    // Function that modify the initial state for listItems: add a new element to listItems array which is the value added by the user to the input
+	//const {username, password} = this.context;
+	// fetch(url, {
+    //   // fetch method provides an easy logical way to fetch resources asynchronously across the network and return a promise. Post request to add item/element to the array in the express server
+	// 	method: "POST",
+	// 	headers: {
+	// 		// for post is needed to provide the headers object whit the content type application json
+	// 		"Content-Type": "application/json",
+	// 		// Authorization: `${this.context[0].username} : ${this.context[0].password}` // use username and password from context 
+	// 		credentials: 'include'
+    //   	},
+    //   	body: JSON.stringify({
+	// 		// in POST request, variables below are sent in the body as key-value pairs
+	// 		title: this.state.input,
+	// 		id: this.state.id,
+	// 		key: this.state.id,
+	// 		completed: this.state.completed,
+	// 		editInput: this.state.editInput
+    //   	}),
+    // })
+	// 	.then((res) => res.json()) // fetch return a propmise that is resoved with response (res) object; to extract the json body content from the response object, we use json() method
+	// 	.then((listItems) => {
+	// 		// which return a second promise that resolves with the result of parsing the response body text as JSON
+	// 		this.setState({
+	// 		// with "this.setState" we change the state for the app: we set the state for listitems array, updateing it with the value added in the input by the user
+	// 		listItems: listItems   , //  adding the new todo item in the array
+	// 		input: "", // reset the input to empty string: we clear the value of the input after the user click on add button
+	// 		id: Date.now(), // set new id
+	// 		completed: false, // set completed attribute to false
+	// 		editInput: false // set editInpute attribute to false
+	// 		});
+	// 	})
+    //   	.catch((error) => console.error("Error " + error)); // here we handeling fetch Promise errors
 		// code below was replaced with the fetch method becoause we implement the express server
 		// const newInput = {
 		//   id: Date.now(),

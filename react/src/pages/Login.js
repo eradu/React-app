@@ -10,8 +10,8 @@ export default function Login() {
     // const [username, setUsername] = useState('');
     // const [password, setPassword] = useState('');
     const[inputs, setInputs] = useState({
-        username: "",
-        password: ""
+        username: "kkk",
+        password: "kkkk"
     });
 	const navigate = useNavigate(); //we use navigate instead of history because in react router version 6 useHistory not work
     const handleChange = (e) => {

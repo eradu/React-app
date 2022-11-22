@@ -21,7 +21,7 @@ router.post('/', async (req,res) => {
         const newUser = new User({ //add new user with username and password
             username,
             password: hashedPassword
-        })  
+        });
         const saveUser = await newUser.save() //save the user in db
         return res.status(200).json({message: saveUser})
     } catch(err) {

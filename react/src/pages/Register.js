@@ -29,7 +29,7 @@ export default function Register() {
           ...prev,
           [e.target.name]: e.target.value,
         }));
-        console.log(e.target.name, "value", e.target.value)
+        //console.log(e.target.name, "value", e.target.value)
       };
     // const [error, setError] = useState('');
     //const [, setCredentials ] = useContext(CredentialsContext);

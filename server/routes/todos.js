@@ -114,40 +114,35 @@ router.delete('/:id', (req,res) => {
 });
 
 //route to post/add items in database
-// router.post('/', async (req,res) => {
-// 	const { authorization } = req.headers; // destructuring req.header object
-// 	const [token] = authorization.split();
-// 	const [username, password] = token.split(" : ");
-
-// 	const user = await User.findOne({ username }).exec(); // check if username already exist and the password is ok for that user
-// 	if(!user || user.password !== password) {		
-// 		res.status(403); // if exist status 403 for the request
-// 		res.json({
-// 			message: "Invalid access!" //if exist send message in res body
-// 		});
-// 		return;
-// 	}
-// 	const item = req.body;
-// 	console.log("1 Item is: ", item);
-// 	const listItems = await Todos.findOne({userId: user._id}).exec();
-// 	console.log("2 listItems is: ", listItems);
-// 	if(!listItems) {
-// 		await Todos.create({
-// 			userId:user._id,
-// 			listItems: item,
-// 		});
-// 		console.log("3 now listItems is: ", listItems);
-// 	} else {
-// 		// listItems.item = listItems;
-// 		// console.log("3.1 listItems.listItems is: ", listItems);
-// 		// const todo = await Todos.findOne(user._id);
-// 		// todo.listItems.push(item)
-// 		await Todos.updateOne({userId: user._id}, {$push: {listItems: item}})
-// 		await listItems.save()
-// 		console.log("4 listItems from else is: ", listItems.listItems);
-// 	}
-// 	res.json(listItems.listItems);
-// });
+router.post('/', async (req,res) => {
+	console.log("todos");
+	const { username } = req.body; // destructuring req.body object
+        const user = await User.findOne({ username }).exec(); // check if username already exist and password is ok
+		console.log("user is: ", user);
+        if(!user) {
+            res.status(400); // if exist status 401 for the request
+            res.json({
+                message: "User not found. Signup Please!" //if exist send message in res body
+            });
+            return;
+        }
+	const item = req.body;
+	console.log("1 Item is: ", item);
+	const listItems = await Todos.findOne({userId: user._id}).exec();
+	console.log("2 listItems is: ", listItems);
+	if(!listItems) {
+		await Todos.create({
+			userId:user._id,
+			listItems: item,
+		});
+		console.log("3 now listItems is: ", listItems);
+	} else {
+		await Todos.updateOne({userId: user._id}, {$push: {listItems: item}})
+		await listItems.save()
+		console.log("4 listItems from else is: ", listItems.listItems);
+	}
+	res.json(listItems.listItems);
+});
 
 // router.get('/', async (req,res) => {
 // 	const { authorization } = req.headers; // destructuring req.header object
@@ -197,9 +192,24 @@ router.get('/', async (req, res, next) => {
     if (!user) {
         return res.status(404).json({message: "User not found"})
     }
-	console.log(user)
     return res.status(200).json({user});
 })
 
 
 module.exports = router; //the module exports the Router object
+
+
+// const item = req.body;
+// const listItems = await Todos.findOne({userId: user._id}).exec();
+// console.log(listItems);
+// if(!listItems) {
+// 	await Todos.create({
+// 		userId: userId._id,
+// 		listItems: item
+// 	});
+// } else {
+// 	await Todos.updateOne({userId: user._id}, {$push: {listItems: item}});
+// 	await listItems.save();
+// }
+// return res.status(200).json(listItems.listItems);
+// next();

@@ -30,7 +30,6 @@ router.post('/', async (req,res,next) => {
             {id: user._id},
             process.env.JWT_SECRET_KEY,
             {expiresIn: "1hr"});
-        console.log("string is: ", token);
         res.cookie("LoginToken", token, {
             path:'/',
             expires: new Date(Date.now() + 1000*260),
