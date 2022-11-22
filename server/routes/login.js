@@ -12,7 +12,7 @@ router.post('/', async (req,res,next) => {
         const { username, password } = req.body; // destructuring req.body object
         const user = await User.findOne({ username }).exec(); // check if username already exist and password is ok
         if(!user) {
-            res.status(400); // if exist status 401 for the request
+            res.status(400); // if exist status 400 for the request
             res.json({
                 message: "User not found. Signup Please!" //if exist send message in res body
             });
@@ -32,7 +32,7 @@ router.post('/', async (req,res,next) => {
             {expiresIn: "1hr"});
         res.cookie("LoginToken", token, {
             path:'/',
-            expires: new Date(Date.now() + 1000*260),
+            expires: new Date(Date.now() + 1000*1000), //TO DO = reset cookies at couple of seconds 
             httpOnly: true,
             sameSite: 'none',
             secure: true

@@ -13,7 +13,6 @@ const todos = require("./routes/todos"); /* todo's route - A route is a section 
 const about = require("./routes/about"); // about page route
 const register = require("./routes/register"); // register page route
 const login = require("./routes/login"); // register page route
-//const user = require('./routes/user'); // user authorization page route
 
 const bodyParser = require("body-parser"); //body-parser is a piece of express middleware that reads a form's input and stores it as a javascript object accessible through req.body
 const path = require("path");
@@ -31,32 +30,31 @@ app.use("/api/login", login); // login route middleware
 const verifyToken = function (req, res, next) {
   const cookies = req.cookies;
   const token = cookies.LoginToken;
-  console.log("verifying token: ",token);
   if (!token) {
-    return res.status(404).json({ message: "No token found!" });
+    console.log("this happens");
+    res.status(404).json({ message: "No token found!" });
+    return;
   }
-
   jwt.verify(String(token), process.env.JWT_SECRET_KEY, (err, user) => {
-
     if (err) {
-      return res.status(400).json({ message: "Invalid token", token });
+      console.log("this also happens");
+      res.status(400).json({ message: "Invalid token" });
+      return;
+    } else {
+      req.id = user.id;
+      next();
     }
-    req.id = user.id;
+    
   });
-  // next()
 };
 app.use(verifyToken);
 
 app.use("/api/todos", todos); // after we call require() function, then we call use() on the Express application to add the Router to the middleware handling path, specifying a URL path
-// app.use('/api/about', about); // about route middleware
-// app.use('/api/register', register); // register route middleware
-// app.use('/api/login', login); // login route middleware
 
 app.use(
   express.json({ extended: false })
 ); /*This option allows to choose between parsing the URL-encoded data with the querystring library (when false) or the qs library (when true). 
                                           The “extended” syntax allows for rich objects and arrays to be encoded into the URL-encoded format, allowing for a JSON-like experience with URL-encoded. */
-
 mongoose
   .connect(process.env.DATABASE_URI) // conect to mongodb
   .then(() => console.log("Database connected..."))
