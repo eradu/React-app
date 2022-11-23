@@ -47,9 +47,9 @@ const verifyToken = function (req, res, next) {
     
   });
 };
-app.use(verifyToken);
+// app.use(verifyToken);
 
-app.use("/api/todos", todos); // after we call require() function, then we call use() on the Express application to add the Router to the middleware handling path, specifying a URL path
+app.use("/api/todos", verifyToken, todos); // after we call require() function, then we call use() on the Express application to add the Router to the middleware handling path, specifying a URL path
 
 app.use(
   express.json({ extended: false })

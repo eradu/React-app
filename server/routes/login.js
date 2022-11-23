@@ -1,5 +1,5 @@
 const express = require('express'); //  imports the Express application object
-const router = express.Router(); // uses it to get a Router object
+const router = express.Router(); // use it to get a Router object
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -9,7 +9,7 @@ const User = require('../models/registerModel');
 // route for register page with post for username and password
 router.post('/', async (req,res,next) => {
     try{
-        const { username, password } = req.body; // destructuring req.body object
+        const { username, password, userId } = req.body; // destructuring req.body object
         const user = await User.findOne({ username }).exec(); // check if username already exist and password is ok
         if(!user) {
             res.status(400); // if exist status 400 for the request
@@ -30,6 +30,7 @@ router.post('/', async (req,res,next) => {
             {id: user._id},
             process.env.JWT_SECRET_KEY,
             {expiresIn: "1hr"});
+            
         res.cookie("LoginToken", token, {
             path:'/',
             expires: new Date(Date.now() + 1000*1000), //TO DO = reset cookies at couple of seconds 
@@ -41,7 +42,10 @@ router.post('/', async (req,res,next) => {
         res.status(200);
         res.json({
             message: "Successfuly logged in!",
-            user: user,
+            user: {
+                username: user.username,
+                id: user._id
+            },
             token
         })
     } catch(err) {

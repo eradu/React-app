@@ -94,31 +94,23 @@ router.delete("/:id", (req, res) => {
 
 //route to post/add items in database
 router.post("/", (req, res) => {
-  const { username } = req.body; // destructuring req.body object
-  const user = User.findOne({ username }).exec(); // check if username already exist and password is ok
-  // if (!user) {
-  //   res.status(400); // if exist status 401 for the request
-  //   res.json({
-  //     message: "User not found. Signup Please!", //if exist send message in res body
-  //   });
-  //   return;
-  // }
+  const { userId } = req.body; // destructuring req.body object
+  
   const item = req.body;
-  const listItems = Todos.findOne({ userId: user._id }).exec();
+  const listItems = Todos.findOne({ userId }).exec();
   if (!listItems) {
     Todos.create({
-      userId: user._id,
+      userId: userId,
       listItems: item,
     });
   } else {
     Todos.updateOne({ userId: user._id }, { $push: { listItems: item } });
-
   }
   res.json(listItems.listItems);
 });
 
 router.get("/", (req, res, next) => {
-	res.end();
+	res.status(201).json(listItems);
 });
 
 

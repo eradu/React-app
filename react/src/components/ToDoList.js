@@ -56,9 +56,9 @@ class ToDoList extends Component {
         },
         withCredentials: true,
       })
-	  .then((res) => {
-		console.log(res);
-	  })
+      .then((res) => {
+        console.log(res);
+      })
       .catch((err) => console.log(err));
   }
 
@@ -89,8 +89,16 @@ class ToDoList extends Component {
           editInput: this.state.editInput,
         },
       })
-      .then((res) => res.json())
+      .then((res) => res.data)
       .then((listItems) => {
+        if (listItems === "") {
+          // TODO listItems should come as an array
+          console.log(
+            "setting list items to empty array if comes up empty string"
+          );
+          listItems = [];
+        }
+
         this.setState({
           listItems: listItems,
           input: "",
@@ -98,7 +106,6 @@ class ToDoList extends Component {
           completed: false,
           editInput: false,
         });
-        console.log(listItems);
       })
       .catch((error) => console.error("Error " + error));
 
