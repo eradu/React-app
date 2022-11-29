@@ -34,7 +34,7 @@ export default function Register() {
 
   	return (
     <div className="register-container">
-        <h1>Register Page</h1>
+        <h1>Register</h1>
       <form onSubmit={register}>
         <input 
             name="username"

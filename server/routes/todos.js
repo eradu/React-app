@@ -94,9 +94,11 @@ router.delete("/:id", (req, res) => {
 
 //route to post/add items in database
 router.post("/", (req, res) => {
-  const { userId } = req.body; // destructuring req.body object
-  
+
+  const { user, userId } = req.body; // destructuring req.body object
+  console.log(userId)
   const item = req.body;
+  console.log(item)
   const listItems = Todos.findOne({ userId }).exec();
   if (!listItems) {
     Todos.create({
@@ -104,7 +106,7 @@ router.post("/", (req, res) => {
       listItems: item,
     });
   } else {
-    Todos.updateOne({ userId: user._id }, { $push: { listItems: item } });
+    Todos.updateOne({ userId: userId }, { $push: { listItems: item } });
   }
   res.json(listItems.listItems);
 });

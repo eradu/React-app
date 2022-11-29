@@ -27,18 +27,17 @@ const About = () => {
     };
     fetchData();
   }, []);
- 
+
   return (
     <div className="about-list">
       <h2>ToDo List</h2>
       <p>This is my first React application.</p>
       <p>What I learned:</p>
       <ul>
-        {
-          learningItems.map((item) => { 
-            return <li key={item.id}>{item.title}</li>;
-          })}		  
-      </ul>	  
+        {learningItems.map((item) => {
+          return <li key={item.id}>{item.title}</li>;
+        })}
+      </ul>
     </div>
   );
 };

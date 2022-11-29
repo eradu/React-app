@@ -3,6 +3,7 @@ import axios from "axios";
 import List from "./List";
 import ListHandler from "./ListHandler";
 import Counter from "./Counter";
+import history from "../components/History";
 
 // We can define and use a constant variable when we use class component only outside of the component!!!
 const UP = -1; // variable used in moveUpDown function
@@ -59,7 +60,12 @@ class ToDoList extends Component {
       .then((res) => {
         console.log(res);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        if(err) {
+          history.replace("/");
+        }
+      });
   }
 
   // 	fetch(url, {

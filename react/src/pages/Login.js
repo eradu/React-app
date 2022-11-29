@@ -51,7 +51,6 @@ export default function Login() {
   //   }).catch((error) => console.error("Error " + error));
   // };
 
-  // useEffect(() => {
   const fetchData = async (e) => {
     if (e && e.preventDefault) { e.preventDefault(); }
     try {
@@ -73,12 +72,10 @@ export default function Login() {
       }
     }
   };
-  // fetchData().then(() => navigate("/todos"));
-  // }, []);
 
   return (
     <div className="login-container">
-      <h1>Login Page</h1>
+      <h1>Login</h1>
       <form onSubmit={fetchData}>
         <input
           name="username"

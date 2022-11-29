@@ -22,6 +22,11 @@ app.use(bodyParser.json()); // tells the system that we want json to be used.
 app.use(cors({ credentials: true, origin: "http://localhost:3000" })); // tells the system that we want cors to be used and we use credentials in it
 app.use(express.static(__dirname));
 
+mongoose
+  .connect(process.env.DATABASE_URI) // conect to mongodb
+  .then(() => console.log("Database connected..."))
+  .catch((err) => console.log(err));
+
 app.use("/api/about", about); // about route middleware
 app.use("/api/register", register); // register route middleware
 app.use("/api/login", login); // login route middleware
@@ -44,21 +49,14 @@ const verifyToken = function (req, res, next) {
       req.id = user.id;
       next();
     }
-    
   });
 };
-// app.use(verifyToken);
 
 app.use("/api/todos", verifyToken, todos); // after we call require() function, then we call use() on the Express application to add the Router to the middleware handling path, specifying a URL path
 
-app.use(
-  express.json({ extended: false })
-); /*This option allows to choose between parsing the URL-encoded data with the querystring library (when false) or the qs library (when true). 
+app.use(express.json({ extended: false })); /*This option allows to choose between parsing the URL-encoded data with the querystring library (when false) or the qs library (when true). 
                                           The “extended” syntax allows for rich objects and arrays to be encoded into the URL-encoded format, allowing for a JSON-like experience with URL-encoded. */
-mongoose
-  .connect(process.env.DATABASE_URI) // conect to mongodb
-  .then(() => console.log("Database connected..."))
-  .catch((err) => console.log(err));
+
 
 const PORT = process.env.PORT || 1234; // variable for the port for listenig server
 
