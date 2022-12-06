@@ -93,27 +93,36 @@ router.delete("/:id", (req, res) => {
 });
 
 //route to post/add items in database
-router.post("/", (req, res) => {
-
-  const { user, userId } = req.body; // destructuring req.body object
-  console.log(userId)
+router.post("/", async (req, res) => {
+  const { id } = req.body; // destructuring req.body object
+  // console.log("req.body is: ", req.body)
+  // console.log("user id is: ",id);
   const item = req.body;
-  console.log(item)
-  const listItems = Todos.findOne({ userId }).exec();
-  if (!listItems) {
-    Todos.create({
-      userId: userId,
-      listItems: item,
+  // console.log("item is: ",item);
+  //destructuring listItems from req.body
+  const { listItems } = await Todos.findOne({ id })
+    //execute findOne who return a promise
+    .exec()
+    //resolve the promise
+    .then(async () => {
+      //set listItems to Todos model findOne where userId is id, then push in listItem that is item from req.body
+      let listItems = Todos.updateOne(
+        { userId: id },
+        { $push: { listItems: [item] } },
+        { upsert: true }, // add document with req.body._id if not exists
+        
+      ).then(() => {
+        //then return the updated todos model with the given id
+        return Todos.findOne({ id });
+      });
+      //return listitems
+      return listItems;
     });
-  } else {
-    Todos.updateOne({ userId: userId }, { $push: { listItems: item } });
-  }
-  res.json(listItems.listItems);
+  console.log("final", listItems);
 });
 
 router.get("/", (req, res, next) => {
-	res.status(201).json(listItems);
+  res.status(201).json(listItems);
 });
-
 
 module.exports = router; //the module exports the Router object

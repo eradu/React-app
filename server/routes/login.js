@@ -37,7 +37,7 @@ router.post("/", async (req, res, next) => {
       expires: new Date(Date.now() + 1000 * 100000), //TO DO = reset cookies at couple of seconds
       httpOnly: true,
       sameSite: "none",
-      secure: true,
+      secure: true
     });
 
     res.status(200);

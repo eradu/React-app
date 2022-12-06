@@ -10,8 +10,8 @@ import { UserContext } from "../components/CredentialContext";
 
 export default function Login() {
   const [inputs, setInputs] = useState({
-    username: "kkk",
-    password: "kkkk",
+    username: "",
+    password: "",
   });
   //const[user, setUser] = useState({})
   const { setUser } = useContext(UserContext);
@@ -57,7 +57,8 @@ export default function Login() {
       const response = await axios.post(`http://localhost:1234/api/login`, {
         username: inputs.username,
         password: inputs.password,
-      });
+      },
+      { withCredentials: true });
       navigate("/todos");
       setUser(response.data.user);
     } catch (err) {

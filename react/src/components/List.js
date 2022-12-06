@@ -1,15 +1,13 @@
-import React, { Component } from "react";
 import ListItem from "./ListItem";
 
 import "../Styles/List.scss"; // import style sas for List component
 
-class List extends Component {
-  render() {
+const List = (props) => {
     return (
       <div className="list">
         <ul>
-          {this.props.listItems.map((item) => {
-            console.log(this.props.listItems);
+          {props.listItems.map((item) => {
+            console.log(props.listItems);
             // in order to render a list of items we map the listItem array and use the ListItem component to render each item
             return (
               <ListItem
@@ -17,23 +15,23 @@ class List extends Component {
                 title={item.title}
                 // this props are comming from parent element App and are sent to the child element ListItem where we have the delete button
                 id={item.id} // to delete a toDo we need the id of the toDo we want to delete and the delete function
-                deleteElement={this.props.deleteElement}
+                deleteElement={props.deleteElement}
                 completed={item.completed} //to mark as complete a toDo we pass completed prop and toggle function from parent App component to List component and from here to child component ListItem where we have the checkbox
-                toggleCompleted={this.props.toggleCompleted}
+                toggleCompleted={props.toggleCompleted}
                 editInput={item.editInput}
                 //setUpdateInput={this.props.setUpdateInput}
-                input={this.props.input}
-                moveUpDown={this.props.moveUpDown}
+                input={props.input}
+                moveUpDown={props.moveUpDown}
                 item={item}
-                UP={this.props.UP}
-                DOWN={this.props.DOWN}
+                UP={props.UP}
+                DOWN={props.DOWN}
               ></ListItem>
             );
           })}
         </ul>
       </div>
     );
-  }
+
 }
 
 export default List;

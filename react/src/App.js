@@ -15,14 +15,11 @@ import "./Styles/App.scss"; // import styles from scss styles
 import "./Styles/Mobile.scss";
 
 function App() {
-  //const credentialState = useState(null);
   const [user, setUser] = useState(null);
   return (
     <UserContext.Provider value={{ user, setUser }}>
-        {/* first we ad BrowserRouter component as Router*/}
         <div className="App">
           <Navbar />
-          {/* nav bar component wich include links to separate pages */}
           <div className="app-inner">
             <Routes>
               {/* to use routes in version 6 of react router we put first the Route component, then use 'exact' keyword to specifi the exact path for this route, then we specify the 'path' for the route and then specifi the component for this route*/}
@@ -34,7 +31,6 @@ function App() {
             </Routes>
           </div>
         </div>
-
     </UserContext.Provider>
   );
 }
