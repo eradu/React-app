@@ -49,7 +49,7 @@ const verifyToken = function (req, res, next) {
     }
   });
 };
-
+//call for get user: we verify the token -> if we have token, we have user and send the user to frontend 
 app.get("/api/user", async (req, res, next) => {
   const cookies = req.cookies;
   const token = cookies.LoginToken;

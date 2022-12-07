@@ -66,6 +66,7 @@ router.delete("/:id", (req, res) => {
 router.post("/", async (req, res) => {
   const item = req.body;
   //destructuring listItems from req.body
+  //changed the previous {id} from findOne to {userId: item.userId}
   const { listItems } = await Todos.findOne({ userId: item.userId })
     //execute findOne who return a promise
     .exec()
@@ -73,16 +74,19 @@ router.post("/", async (req, res) => {
     .then(async () => {
       //set listItems to Todos model findOne where userId is id, then push in listItem that is item from req.body
       let listItems = Todos.updateOne(
+        //in updateOne, changed the userId from id to item.userId
         { userId: item.userId },
         { $push: { listItems: [item] } },
         { upsert: true } // add document with req.body._id if not exists
       ).then(() => {
         //then return the updated todos model with the given id
+        //changed the userId from id to item.userId
         return Todos.findOne({ userId: item.userId });
       });
       //return listitems
       return listItems;
     });
+  //we map through listItems and return from here a new array (newModifListItems) the id, which is the id from mongodb 
   const newModifListItems = listItems.map((listitem) => {
     return {
       title: listitem.title,
@@ -93,7 +97,7 @@ router.post("/", async (req, res) => {
   });
   res.json(newModifListItems);
 });
-
+//route to get the userId (from Todolist component) and set the listItems to the user
 router.get("/", async (req, res, next) => {
   const { userIdFromQuery } = req.query.userId;
   const { listItems } = await Todos.findOne({ userId: userIdFromQuery });

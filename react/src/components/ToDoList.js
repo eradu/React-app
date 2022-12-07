@@ -16,10 +16,11 @@ export default function ToDoList() {
   const [input, setInput] = useState("");
   const [completed, setCompleted] = useState(false);
   const [editInput, setEditInput] = useState(false);
-
+// added usercontext
   const { user } = useContext(UserContext);
 
   useEffect(() => {
+    //check if user exist; if exist, we get listItems based on the userId using a querry in url with params  
     if (user) {
       fetch(
         url +
@@ -59,6 +60,7 @@ export default function ToDoList() {
         "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify({
+        //added in body the userId as user.userId from context, and deleted the id and the key (ich is set in List.js as the index)
         userId: user.userId,
         title: input,
         completed: completed,

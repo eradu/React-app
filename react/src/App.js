@@ -14,13 +14,14 @@ import history from "./components/History";
 
 import "./Styles/App.scss"; // import styles from scss styles
 import "./Styles/Mobile.scss";
-import { faCropSimple } from "@fortawesome/free-solid-svg-icons";
+
 
 const url = "http://localhost:1234/api/user";
 
 function App() {
   const [user, setUser] = useState(null);
-
+//added useEfect to check if the user exist; if exist we set the user id as data.user.id from context and add the username as "Already logged in, not having username"
+//if user not exist we redirect to login
   useEffect(() => {
     fetch(url, {
       method: "GET",

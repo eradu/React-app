@@ -45,6 +45,7 @@ router.post("/", async (req, res, next) => {
       message: "Successfuly logged in!",
       user: {
         username: user.username,
+        // changed the id to userId, to send it to front 
         userId: user._id
       },
       token,
