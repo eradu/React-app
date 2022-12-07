@@ -3,7 +3,8 @@ import List from "./List";
 import ListHandler from "./ListHandler";
 import Counter from "./Counter";
 import history from "../components/History";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from "../components/CredentialContext";
 
 const UP = -1; // variable used in moveUpDown function
 const DOWN = 1; // variable used in moveUpDown function
@@ -13,110 +14,66 @@ export default function ToDoList() {
   const [listItems, setListItems] = useState([]);
   const [loaded] = useState(true);
   const [input, setInput] = useState("");
-  const [id, setId] = useState(Date.now());
   const [completed, setCompleted] = useState(false);
   const [editInput, setEditInput] = useState(false);
 
+  const { user } = useContext(UserContext);
+
   useEffect(() => {
-    fetch(url, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true
-      }
-    })
-      .then((res) => res.json())
-      .then((listItems) => {
-        setListItems(listItems);
-        console.log(listItems);
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err) {
-          history.replace("/");
+    if (user) {
+      fetch(
+        url +
+          "?" +
+          new URLSearchParams({
+            userId: user.userId,
+          }),
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+          },
         }
-      });
-    //   axios.defaults.withCredentials = true;
-    //   axios
-    //     .get(url, {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       withCredentials: true,
-    //     })
-
-    //     .then((res) => res.data)
-
-    //     .then((listItems) => setListItems(listItems))
-    //     .catch((err) => {
-    //       console.log(err);
-    //       if (err) {
-    //         history.replace("/");
-    //       }
-    //     });
-    // }, []
-  }, []);
+      )
+        .then((res) => res.json())
+        .then((listItems) => {
+          setListItems(listItems);
+        })
+        .catch((err) => {
+          console.log(err);
+          if (err) {
+            history.replace("/");
+          }
+        });
+    }
+  }, [user]);
 
   // Function that modify the initial state for listItems: add a new element to listItems array which is the value added by the user to the input
   const addElementToList = () => {
-    // axios
-    //   .post(url, {
-    //     withCredentials: true,
-    //     data: {
-    //       title: input,
-    //       id: id,
-    //       key: id,
-    //       completed: completed,
-    //       editInput: editInput,
-    //     },
-    //   })
-    //   .then((res) => res.data)
-    //   .then((listItems) => {
-    //     if (listItems === "") {
-    //       // TODO listItems should come as an array
-    //       console.log(
-    //         "setting list items to empty array if comes up empty string",
-    //         listItems
-    //       );
-    //       listItems = [];
-    //     } else {
-    //       setListItems(listItems);
-    //       console.log(listItems)
-    //     }
-    //     setListItems(listItems);
-    //     setInput("");
-    //     setId(id);
-    //     setCompleted(false);
-    //     setEditInput(false);
-    //   })
-    //   .catch((error) => console.error("Error " + error));
-
     fetch(url, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true
+        "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify({
+        userId: user.userId,
         title: input,
-        id: id,
-        key: id,
         completed: completed,
         editInput: editInput,
       }),
     })
-      .then((res) => res.json()) 
+      .then((res) => res.json())
       .then((listItems) => {
         setListItems(listItems);
         setInput("");
-        setId(id);
         setCompleted(false);
         setEditInput(false);
       })
       // })
-      .catch((error) => console.error("Error " + error)); 
+      .catch((error) => console.error("Error " + error));
   };
   // function to delete an toDo (element) based on the element id
   const deleteElement = (id) => {
@@ -213,7 +170,7 @@ export default function ToDoList() {
             moveUpDown={moveUpDown}
             UP={UP}
             DOWN={DOWN}
-            key={id}
+            // key={id}
           />
         </div>
       </div>

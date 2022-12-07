@@ -13,9 +13,10 @@ export default function Login() {
     username: "",
     password: "",
   });
-  //const[user, setUser] = useState({})
+
   const { setUser } = useContext(UserContext);
-  const navigate = useNavigate(); //we use navigate instead of history because in react router version 6 useHistory not work
+  //we use navigate instead of history because in react router version 6 useHistory not work
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setInputs((prev) => ({
       ...prev,
@@ -23,44 +24,22 @@ export default function Login() {
     }));
   };
 
-  // const sendRequest = async () => {
-  //   const res = await axios
-  //     .post(
-  //       `http://localhost:1234/api/login`,
-  //       {
-  //         username: inputs.username,
-  //         password: inputs.password,
-  //       },
-  //       { withCredentials: true }      )
-  //     .catch((err) => console.log(err));
-  //   const data = await res.data;
-  //   return data;
-  // };
-  // const login = (e) => {
-  //   e.preventDefault();
-  //   console.log(inputs);
-  //   sendRequest().then(() => navigate("/todos"));
-  //   fetch(`http://localhost:1234/api/login`, {
-  //     method: 'POST',
-  //     headers: {"Content-type": "application/json"},
-  //     body: JSON.stringify({user})
-
-  //   }).then(() => {
-  //     setUser({user})
-
-  //   }).catch((error) => console.error("Error " + error));
-  // };
-
   const fetchData = async (e) => {
-    if (e && e.preventDefault) { e.preventDefault(); }
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
     try {
-      const response = await axios.post(`http://localhost:1234/api/login`, {
-        username: inputs.username,
-        password: inputs.password,
-      },
-      { withCredentials: true });
+      const response = await axios.post(
+        `http://localhost:1234/api/login`,
+        {
+          username: inputs.username,
+          password: inputs.password,
+        },
+        { withCredentials: true }
+      );
       navigate("/todos");
       setUser(response.data.user);
+      console.log("loginfront ",response.data.user);
     } catch (err) {
       if (err.response) {
         //if NOT in the 200 response range

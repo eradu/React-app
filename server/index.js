@@ -36,13 +36,11 @@ const verifyToken = function (req, res, next) {
   const cookies = req.cookies;
   const token = cookies.LoginToken;
   if (!token) {
-    console.log("this happens");
     res.status(404).json({ message: "No token found!" });
     return;
   }
   jwt.verify(String(token), process.env.JWT_SECRET_KEY, (err, user) => {
     if (err) {
-      console.log("this also happens");
       res.status(400).json({ message: "Invalid token" });
       return;
     } else {
@@ -51,6 +49,23 @@ const verifyToken = function (req, res, next) {
     }
   });
 };
+
+app.get("/api/user", async (req, res, next) => {
+  const cookies = req.cookies;
+  const token = cookies.LoginToken;
+  if (!token) {
+    res.status(404).json({ message: "No token found!" });
+    return;
+  }
+  jwt.verify(String(token), process.env.JWT_SECRET_KEY, (err, user) => {
+    if (err) {
+      res.status(400).json({ message: "Invalid token" });
+      return;
+    } else {
+      res.status(200).json({ user })
+    }
+  });
+});
 
 app.use("/api/todos", verifyToken, todos); // after we call require() function, then we call use() on the Express application to add the Router to the middleware handling path, specifying a URL path
 

@@ -8,7 +8,7 @@ const User = require("../models/registerModel");
 // route for register page with post for username and password
 router.post("/", async (req, res, next) => {
   try {
-    const { username, password, userId } = req.body; // destructuring req.body object
+    const { username, password } = req.body; // destructuring req.body object
     const user = await User.findOne({ username }).exec(); // check if username already exist and password is ok
     if (!user) {
       res.status(400); // if exist status 400 for the request
@@ -45,7 +45,7 @@ router.post("/", async (req, res, next) => {
       message: "Successfuly logged in!",
       user: {
         username: user.username,
-        id: user._id,
+        userId: user._id
       },
       token,
     });

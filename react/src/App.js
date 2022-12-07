@@ -1,4 +1,4 @@
-import React, { useState } from "react"; // import react Component
+import React, { useState, useEffect } from "react"; // import react Component
 import { Route, Routes } from "react-router-dom"; //import react-router
 
 import ToDoList from "./components/ToDoList"; // import components in parent component
@@ -10,27 +10,56 @@ import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
 
 import { UserContext } from "./components/CredentialContext";
+import history from "./components/History";
 
 import "./Styles/App.scss"; // import styles from scss styles
 import "./Styles/Mobile.scss";
+import { faCropSimple } from "@fortawesome/free-solid-svg-icons";
+
+const url = "http://localhost:1234/api/user";
 
 function App() {
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch(url, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.user) {
+          console.log(data);
+          setUser({
+            userId: data.user.id,
+            username: "Already logged in, not having username",
+          });
+        } else {
+          history.replace("/login");
+        }
+      });
+  }, []);
+
   return (
     <UserContext.Provider value={{ user, setUser }}>
-        <div className="App">
-          <Navbar />
-          <div className="app-inner">
-            <Routes>
-              {/* to use routes in version 6 of react router we put first the Route component, then use 'exact' keyword to specifi the exact path for this route, then we specify the 'path' for the route and then specifi the component for this route*/}
-              <Route exact path="/" element={<Welcome />}/>
-              <Route exact path="todos" element={<ToDoList />} />
-              <Route exact path="login" element={<Login />} />
-              <Route exact path="register" element={<Register />} />
-              <Route exact path="about" element={<About />} />
-            </Routes>
-          </div>
+      Hello {user ? user.username : ""}
+      <div className="App">
+        <Navbar />
+        <div className="app-inner">
+          <Routes>
+            {/* to use routes in version 6 of react router we put first the Route component, then use 'exact' keyword to specifi the exact path for this route, then we specify the 'path' for the route and then specifi the component for this route*/}
+            <Route exact path="/" element={<Welcome />} />
+            <Route exact path="todos" element={<ToDoList />} />
+            <Route exact path="login" element={<Login />} />
+            <Route exact path="register" element={<Register />} />
+            <Route exact path="about" element={<About />} />
+          </Routes>
         </div>
+      </div>
     </UserContext.Provider>
   );
 }
