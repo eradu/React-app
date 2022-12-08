@@ -100,7 +100,11 @@ router.post("/", async (req, res) => {
 //route to get the userId (from Todolist component) and set the listItems to the user
 router.get("/", async (req, res, next) => {
   const { userIdFromQuery } = req.query.userId;
-  const { listItems } = await Todos.findOne({ userId: userIdFromQuery });
+  const mongooseResponse = await Todos.findOne({ userId: userIdFromQuery });
+  let listItems = [];
+  if(mongooseResponse) {
+    listItems = mongooseResponse.listItems;
+  }
   res.status(201).json(listItems);
 });
 
