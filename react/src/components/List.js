@@ -14,7 +14,7 @@ const List = (props) => {
                 key={index} // with key and value props we render the list from ListItem component
                 title={item.title}
                 // this props are comming from parent element App and are sent to the child element ListItem where we have the delete button
-                id={item.id} // to delete a toDo we need the id of the toDo we want to delete and the delete function
+                id={item._id} // to delete a toDo we need the id of the toDo we want to delete and the delete function
                 deleteElement={props.deleteElement}
                 completed={item.completed} //to mark as complete a toDo we pass completed prop and toggle function from parent App component to List component and from here to child component ListItem where we have the checkbox
                 toggleCompleted={props.toggleCompleted}

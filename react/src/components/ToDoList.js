@@ -57,10 +57,10 @@ export default function ToDoList() {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true,
+        "Access-Control-Allow-Credentials": true
       },
       body: JSON.stringify({
-        //added in body the userId as user.userId from context, and deleted the id and the key (ich is set in List.js as the index)
+        //added in body the userId as user.userId from context, and deleted the id and the key (key is set in List.js as the index)
         userId: user.userId,
         title: input,
         completed: completed,
@@ -79,11 +79,15 @@ export default function ToDoList() {
   };
   // function to delete an toDo (element) based on the element id
   const deleteElement = (id) => {
-    fetch(url + "/" + id, {
+    fetch(url + "/" + id + "?" + new URLSearchParams({
+      userId: user.userId,
+    }), {
       // to delete an item we need to send to server along with the url the id from the item that will be deleted
       method: "DELETE",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true
       },
     })
       .then((res) => res.json())
