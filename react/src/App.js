@@ -19,7 +19,8 @@ import "./Styles/Mobile.scss";
 const url = "http://localhost:1234/api/user";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState('');
+  console.log(user)
 //added useEfect to check if the user exist; if exist we set the user id as data.user.id from context and add the username as "Already logged in, not having username"
 //if user not exist we redirect to login
   useEffect(() => {
@@ -34,7 +35,6 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         if (data.user) {
-          console.log(data);
           setUser({
             userId: data.user.id,
             username: "Already logged in, not having username",
@@ -42,14 +42,15 @@ function App() {
         } else {
           history.replace("/login");
         }
+        console.log(data.user.username);
       });
   }, []);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      Hello {user ? user.username : ""}
       <div className="App">
         <Navbar />
+      <h3>Hello {user ? user.username : ""}</h3>  
         <div className="app-inner">
           <Routes>
             {/* to use routes in version 6 of react router we put first the Route component, then use 'exact' keyword to specifi the exact path for this route, then we specify the 'path' for the route and then specifi the component for this route*/}

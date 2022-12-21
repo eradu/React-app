@@ -8,6 +8,7 @@ import "../Styles/Welcome.scss";
 
 export default function Welcome() {
   const { user } = useContext(UserContext);
+  console.log(user);
   return (
     <div className="welcome-container">
       {!user && <h2>Welcome to ToDo List</h2>}

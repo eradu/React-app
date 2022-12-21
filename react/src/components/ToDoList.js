@@ -16,11 +16,11 @@ export default function ToDoList() {
   const [input, setInput] = useState("");
   const [completed, setCompleted] = useState(false);
   const [editInput, setEditInput] = useState(false);
-// added usercontext
+  // added usercontext
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    //check if user exist; if exist, we get listItems based on the userId using a querry in url with params  
+    //check if user exist; if exist, we get listItems based on the userId using a querry in url with params
     if (user) {
       fetch(
         url +
@@ -39,6 +39,7 @@ export default function ToDoList() {
       )
         .then((res) => res.json())
         .then((listItems) => {
+          console.log(listItems);
           setListItems(listItems);
         })
         .catch((err) => {
@@ -57,7 +58,7 @@ export default function ToDoList() {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true
+        "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify({
         //added in body the userId as user.userId from context, and deleted the id and the key (key is set in List.js as the index)
@@ -79,19 +80,27 @@ export default function ToDoList() {
   };
   // function to delete an toDo (element) based on the element id
   const deleteElement = (id) => {
-    fetch(url + "/" + id + "?" + new URLSearchParams({
-      userId: user.userId,
-    }), {
-      // to delete an item we need to send to server along with the url the id from the item that will be deleted
-      method: "DELETE",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true
-      },
-    })
+    fetch(
+      url +
+        "/" +
+        id +
+        "?" +
+        new URLSearchParams({
+          userId: user.userId,
+        }),
+      {
+        // to delete an item we need to send to server along with the url the id from the item that will be deleted
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((listItems) => {
+        console.log(listItems);
         setListItems(listItems);
       })
       .catch((err) => {
@@ -101,19 +110,26 @@ export default function ToDoList() {
   };
   // function to toggle if an todo is completed or not completed
   const toggleCompleted = (id) => {
-    fetch(url + "/" + id, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // in POST request, variables below are sent in the body as key-value pairs
-        id: id,
-        completed: !completed,
-      }),
-    })
+    fetch(
+      url +
+        "/" +
+        id +
+        "?" +
+        new URLSearchParams({
+          userId: user.userId,
+        }),
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((listItems) => {
+        console.log(listItems);
         setListItems(listItems);
       })
       .catch((err) => {
@@ -122,23 +138,45 @@ export default function ToDoList() {
   };
   // function to change position of an todo element: we move the todo element up or down
   const moveUpDown = (id, direction) => {
-    const { listItems } = this.state; // object destructering - assign this.state.listItems to the cons variable listItems
-    // Remove item from the array
-    const position = listItems.findIndex((i) => i.id === id); // defining the position of the item
+    // defining the position of the item
+    const position = listItems.findIndex((i) => i._id === id);
+    // validation: if the item does not exist - throw error message
     if (position < 0) {
-      // validation: if the item does not exist - throw error message
       throw new Error("Item not found");
     } else if (
-      // validation: canot move outside of array
+      // validation: cannot move outside of array
       (direction === UP && position === 0) || // if the item is the first item - can't move up
       (direction === DOWN && position === listItems.lenght - 1) // if the item is the last item - can't move down
     ) {
       return;
     }
-    const item = listItems[position]; // save item for later
-    const newItems = listItems.filter((i) => i.id !== id); // remove item from array
-    newItems.splice(position + direction, 0, item); // put the item on the new position
-    setListItems(newItems);
+    //set pozition of element
+    //let aux = listItems[position];
+    //if want to move element UP
+
+    if (direction === UP) {
+      //set the element pozition at new pozition up one level
+      //listItems[position] = listItems[position - 1];
+      const newListItems = JSON.parse(JSON.stringify(listItems));
+      [newListItems[position], newListItems[position - 1]] = [
+        newListItems[position - 1],
+        newListItems[position],
+      ];
+      setListItems([newListItems]);
+      //set new pozition as aux pozition
+      //listItems[position - 1] = aux;
+    } else {
+      const newListItems = [...listItems];
+      //same for DOWN direction
+      // listItems[position] = listItems[position + 1];
+      // listItems[position + 1] = aux;
+      [newListItems[position], newListItems[position + 1]] = [
+        newListItems[position + 1],
+        newListItems[position],
+      ];
+      setListItems([...newListItems]);
+    }
+    console.log(listItems);
   };
   // function to add an todo element with enter key from keyboard
   const handleKeyEnter = (event) => {

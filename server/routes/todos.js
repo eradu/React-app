@@ -18,21 +18,22 @@ router.get("/titles", (req, res) => {
 });
 
 // route to update completed
-router.post("/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  // function to mark element (toDo) as done with a checkbox based on the element id
-  listItems = listItems.map((item) => {
-    //we map through the array and based to the id of element
-    if (item.id === id) {
-      // if the id of the element marked is equal with the id,
-      item.completed = !item.completed; //we toggle the state for completet from false to true
+router.post("/:id", async (req, res) => {
+  const id = req.params.id;
+  const userIdFromQuery = req.query.userId;
+  const todoDoc = await Todos.findOne({ userId: userIdFromQuery });
+  todoDoc.listItems = todoDoc.listItems.map((item) => {
+    if(item._id.toString() === id) {
+      item.completed = !item.completed;
     }
-    return item;
+   return item;
   });
-  res.status(200).json(listItems); // and set the new state for the array
+  todoDoc.save().then((savedDoc) => {
+    res.json(savedDoc.listItems);
+  });
 });
 
-// route to edit (put) an item from the listItems array
+// route to edit an item from the listItems array
 router.put("/:id", async (req, res) => {
   const id = req.params.id; // convert id from object to number
   const userIdFromQuery = req.query.userId;
@@ -52,18 +53,22 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   //take id from req params
   const id = req.params.id; 
+  console.log("id is: ",id)
   //take the userId from req query params from deleteElement fct from front TodoList
   const userIdFromQuery = req.query.userId;
   //find the todo where userId is id from query
   const todoDoc = await Todos.findOne({ userId: userIdFromQuery });
+  console.log("tododoc is: ",todoDoc.listItems);
   //filter listitems where item id is id and delete that item
   todoDoc.listItems = todoDoc.listItems.filter((item) => {
     return item._id.toString() !== id;
   });
   //save the new array of listitems and send to front
   todoDoc.save().then((savedDoc) => {
+    console.log("savedDoc.listItems is: ",savedDoc.listItems)
     res.json(savedDoc.listItems);
   });
+
 });
 
 //route to post/add items in database

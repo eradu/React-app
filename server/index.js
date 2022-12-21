@@ -20,7 +20,7 @@ const jwt = require("jsonwebtoken");
 app.use(cookieParser()); // tells the system that we want to use cookie parser
 app.use(bodyParser.json()); // tells the system that we want json to be used.
 app.use(cors({ credentials: true, origin: "http://localhost:3000" })); // tells the system that we want cors to be used and we use credentials in it
-app.use(express.static(__dirname));
+// app.use(express.static(__dirname));
 
 mongoose
   .connect(process.env.DATABASE_URI) // conect to mongodb
@@ -63,6 +63,8 @@ app.get("/api/user", async (req, res, next) => {
       return;
     } else {
       res.status(200).json({ user })
+      console.log("user from get/user: ",user);
+      next();
     }
   });
 });
@@ -80,9 +82,9 @@ app.get("/api", (req, res) => {
   res.send("hello world");
 });
 
-app.get("/*", function (req, res, next) {
-  res.sendFile(path.join(__dirname, "../my-app-new/build", "index.html"));
-  next();
-});
+// app.get("/*", function (req, res, next) {
+//   res.sendFile(path.join(__dirname, "../my-app-new/build", "index.html"));
+//   next();
+// });
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}!`)); // set the server port for listening

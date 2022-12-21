@@ -7,7 +7,6 @@ const List = (props) => {
       <div className="list">
         <ul>
           {props.listItems.map((item, index) => {
-            console.log(props.listItems);
             // in order to render a list of items we map the listItem array and use the ListItem component to render each item
             return (
               <ListItem
