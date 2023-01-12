@@ -57,10 +57,7 @@ function ListItem(props) {
   };
   return (
     // we use a ternary operator for the completed attr, to render the item with line strike if the item is completed
-    <li
-      className={props.completed ? "list-item strike" : "list-item"}
-      key="item.id"
-    >
+    <li className={props.completed ? "list-item strike" : "list-item"}>
       <span className="list-check">
         <input
           type="checkbox"

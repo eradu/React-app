@@ -53,19 +53,16 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   //take id from req params
   const id = req.params.id; 
-  console.log("id is: ",id)
   //take the userId from req query params from deleteElement fct from front TodoList
   const userIdFromQuery = req.query.userId;
   //find the todo where userId is id from query
   const todoDoc = await Todos.findOne({ userId: userIdFromQuery });
-  console.log("tododoc is: ",todoDoc.listItems);
   //filter listitems where item id is id and delete that item
   todoDoc.listItems = todoDoc.listItems.filter((item) => {
     return item._id.toString() !== id;
   });
   //save the new array of listitems and send to front
   todoDoc.save().then((savedDoc) => {
-    console.log("savedDoc.listItems is: ",savedDoc.listItems)
     res.json(savedDoc.listItems);
   });
 

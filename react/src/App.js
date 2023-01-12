@@ -55,9 +55,9 @@ function App() {
           <Routes>
             {/* to use routes in version 6 of react router we put first the Route component, then use 'exact' keyword to specifi the exact path for this route, then we specify the 'path' for the route and then specifi the component for this route*/}
             <Route exact path="/" element={<Welcome />} />
-            <Route exact path="todos" element={<ToDoList />} />
             <Route exact path="login" element={<Login />} />
             <Route exact path="register" element={<Register />} />
+            <Route exact path="todos" element={<ToDoList />} />
             <Route exact path="about" element={<About />} />
           </Routes>
         </div>

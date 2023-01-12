@@ -100,7 +100,6 @@ export default function ToDoList() {
     )
       .then((res) => res.json())
       .then((listItems) => {
-        console.log(listItems);
         setListItems(listItems);
       })
       .catch((err) => {
@@ -129,7 +128,6 @@ export default function ToDoList() {
     )
       .then((res) => res.json())
       .then((listItems) => {
-        console.log(listItems);
         setListItems(listItems);
       })
       .catch((err) => {
@@ -157,12 +155,12 @@ export default function ToDoList() {
     if (direction === UP) {
       //set the element pozition at new pozition up one level
       //listItems[position] = listItems[position - 1];
-      const newListItems = JSON.parse(JSON.stringify(listItems));
+      const newListItems = [...listItems];
       [newListItems[position], newListItems[position - 1]] = [
         newListItems[position - 1],
         newListItems[position],
       ];
-      setListItems([newListItems]);
+      setListItems([...newListItems]);
       //set new pozition as aux pozition
       //listItems[position - 1] = aux;
     } else {
@@ -176,7 +174,6 @@ export default function ToDoList() {
       ];
       setListItems([...newListItems]);
     }
-    console.log(listItems);
   };
   // function to add an todo element with enter key from keyboard
   const handleKeyEnter = (event) => {
