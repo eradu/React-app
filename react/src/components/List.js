@@ -7,10 +7,11 @@ const List = (props) => {
     <div className="list">
       <ul>
         {props.listItems.map((item) => {
+          console.log(item)
           // in order to render a list of items we map the listItem array and use the ListItem component to render each item
           return (
             <ListItem
-              key={item._id + item.title} // with key and value props we render the list from ListItem component
+              key={item._id} // with key and value props we render the list from ListItem component
               title={item.title}
               // this props are comming from parent element App and are sent to the child element ListItem where we have the delete button
               id={item._id} // to delete a toDo we need the id of the toDo we want to delete and the delete function

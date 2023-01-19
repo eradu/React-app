@@ -18,7 +18,6 @@ export default function ToDoList() {
   const [editInput, setEditInput] = useState(false);
   // added usercontext
   const { user } = useContext(UserContext);
-
   useEffect(() => {
     //check if user exist; if exist, we get listItems based on the userId using a querry in url with params
     if (user) {
@@ -39,7 +38,6 @@ export default function ToDoList() {
       )
         .then((res) => res.json())
         .then((listItems) => {
-          console.log(listItems);
           setListItems(listItems);
         })
         .catch((err) => {
@@ -80,6 +78,7 @@ export default function ToDoList() {
   };
   // function to delete an toDo (element) based on the element id
   const deleteElement = (id) => {
+    console.log(id);
     fetch(
       url +
         "/" +
@@ -88,6 +87,7 @@ export default function ToDoList() {
         new URLSearchParams({
           userId: user.userId,
         }),
+       
       {
         // to delete an item we need to send to server along with the url the id from the item that will be deleted
         method: "DELETE",
@@ -144,7 +144,7 @@ export default function ToDoList() {
     } else if (
       // validation: cannot move outside of array
       (direction === UP && position === 0) || // if the item is the first item - can't move up
-      (direction === DOWN && position === listItems.lenght - 1) // if the item is the last item - can't move down
+      (direction === DOWN && position === listItems.length - 1) // if the item is the last item - can't move down
     ) {
       return;
     }
@@ -211,7 +211,6 @@ export default function ToDoList() {
             moveUpDown={moveUpDown}
             UP={UP}
             DOWN={DOWN}
-            // key={id}
           />
         </div>
       </div>

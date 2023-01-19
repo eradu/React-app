@@ -23,10 +23,10 @@ router.post("/:id", async (req, res) => {
   const userIdFromQuery = req.query.userId;
   const todoDoc = await Todos.findOne({ userId: userIdFromQuery });
   todoDoc.listItems = todoDoc.listItems.map((item) => {
-    if(item._id.toString() === id) {
+    if (item._id.toString() === id) {
       item.completed = !item.completed;
     }
-   return item;
+    return item;
   });
   todoDoc.save().then((savedDoc) => {
     res.json(savedDoc.listItems);
@@ -39,10 +39,10 @@ router.put("/:id", async (req, res) => {
   const userIdFromQuery = req.query.userId;
   const todoDoc = await Todos.findOne({ userId: userIdFromQuery });
   todoDoc.listItems = todoDoc.listItems.map((item) => {
-    if(item._id.toString() === id) {
+    if (item._id.toString() === id) {
       item.title = req.body.title;
     }
-   return item;
+    return item;
   });
   todoDoc.save().then((savedDoc) => {
     res.json(savedDoc.listItems);
@@ -52,7 +52,7 @@ router.put("/:id", async (req, res) => {
 // route to delete item from the listItems array
 router.delete("/:id", async (req, res) => {
   //take id from req params
-  const id = req.params.id; 
+  const id = req.params.id;
   //take the userId from req query params from deleteElement fct from front TodoList
   const userIdFromQuery = req.query.userId;
   //find the todo where userId is id from query
@@ -65,7 +65,6 @@ router.delete("/:id", async (req, res) => {
   todoDoc.save().then((savedDoc) => {
     res.json(savedDoc.listItems);
   });
-
 });
 
 //route to post/add items in database

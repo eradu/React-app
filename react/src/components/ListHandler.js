@@ -18,7 +18,7 @@ const ListHandler = (props) => {
             </input>
             {/* we use ternary operator to show add button for new item or edit button in case that the user chose to edit an item */}
             <button className="add-btn"
-              onClick={() => {props.addElement();}
+              onClick={() => {props.addElement()}
             }>
               Add ToDo
             </button>

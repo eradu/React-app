@@ -73,7 +73,7 @@ function ListItem(props) {
         <input
           className="edit-input"
           type="text"
-          id={props.id}
+          id={props._id}
           value={title}
           // we use onChange fction to set the new title with parameters e.target.value and the id from the props
           onChange={(e) => {

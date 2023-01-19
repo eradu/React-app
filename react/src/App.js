@@ -8,6 +8,7 @@ import About from "./components/About";
 import Register from "./pages/Register";
 import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
+import JsonParse from "./pages/JsonParse";
 
 import { UserContext } from "./components/CredentialContext";
 import history from "./components/History";
@@ -20,7 +21,6 @@ const url = "http://localhost:1234/api/user";
 
 function App() {
   const [user, setUser] = useState('');
-  console.log(user)
 //added useEfect to check if the user exist; if exist we set the user id as data.user.id from context and add the username as "Already logged in, not having username"
 //if user not exist we redirect to login
   useEffect(() => {
@@ -36,13 +36,12 @@ function App() {
       .then((data) => {
         if (data.user) {
           setUser({
-            userId: data.user.id,
-            username: "Already logged in, not having username",
+            userId: data.user.userId,
+            username: data.user.username,
           });
         } else {
           history.replace("/login");
         }
-        console.log(data.user.username);
       });
   }, []);
 
@@ -59,6 +58,7 @@ function App() {
             <Route exact path="register" element={<Register />} />
             <Route exact path="todos" element={<ToDoList />} />
             <Route exact path="about" element={<About />} />
+            <Route exact path="json" element={<JsonParse />} />
           </Routes>
         </div>
       </div>
