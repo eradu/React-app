@@ -42,6 +42,18 @@ const Navbar = () => {
             About
           </Link>
         )}
+         {!user && (
+          <Link
+            id="site-link"
+            className={activeLink === "site-link" ? "active" : ""}
+            onClick={() => {
+              setActiveLink("site-link");
+            }}
+            to="/site"
+          >
+            WebSite
+          </Link>
+        )}
         {user && (
           <Link className="logout-btn" onClick={logout} to="/">
             Logout

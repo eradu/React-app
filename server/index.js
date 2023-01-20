@@ -13,14 +13,15 @@ const todos = require("./routes/todos"); /* todo's route - A route is a section 
 const about = require("./routes/about"); // about page route
 const register = require("./routes/register"); // register page route
 const login = require("./routes/login"); // register page route
+const website = require("./routes/website");
+
 const User = require("./models/registerModel");
 const bodyParser = require("body-parser"); //body-parser is a piece of express middleware that reads a form's input and stores it as a javascript object accessible through req.body
-const path = require("path");
 const jwt = require("jsonwebtoken");
+
 app.use(cookieParser()); // tells the system that we want to use cookie parser
 app.use(bodyParser.json()); // tells the system that we want json to be used.
 app.use(cors({ credentials: true, origin: "http://localhost:3000" })); // tells the system that we want cors to be used and we use credentials in it
-// app.use(express.static(__dirname));
 
 mongoose
   .connect(process.env.DATABASE_URI) // conect to mongodb
@@ -30,6 +31,7 @@ mongoose
 app.use("/api/about", about); // about route middleware
 app.use("/api/register", register); // register route middleware
 app.use("/api/login", login); // login route middleware
+app.use("/api/website", website);
 
 // middleware to verify token in /todos route; all routes that are above this middleware are not verified
 const verifyToken = function (req, res, next) {
