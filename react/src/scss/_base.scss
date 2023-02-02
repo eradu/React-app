@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --black: #242424;
+  --green: #439665;
+  --dark-grey-background: #333;
+  --grey-text: #686868;
+  --pink-background-color: #f7d5ba;
+  --red-background-color: #c32934;
+  --white-background-color: #ffffff;
+  --dark-grey-background-color: #333333;
+  --green-background-color: #54635c;
+  --star-yellow-background-color: #EABE12;
+  --yellow-background-color: #eab63e;
+  --blue-background-color: #0f3264;
+  --light-blue-background-color: #0F4C81;
+  --cream-background-color: #e1d8c7;
+  --grey-background-color: #81868c;
+  --transition: all .8s cubic-bezier(.19,1,.22,1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Karla-Font",Arial,Helvetica,sans-serif;
+  background-color: #fff;
+  letter-spacing: 0.5px;
+}
+
+html,
+body,
+.app {
+  overflow: visible;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.px-10 {
+  padding: 0 10px;
+}
+
+.mx-7 {
+  margin-left: 7px;
+}

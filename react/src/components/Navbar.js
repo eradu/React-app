@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom"; // import Link component
+import { Link, useLocation } from "react-router-dom"; // import Link component
 
 import { UserContext } from "./CredentialContext";
 import "../Styles/Navbar.scss";
@@ -7,7 +7,13 @@ import "../Styles/Navbar.scss";
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState();
   const { user, setUser } = useContext(UserContext);
+  const [color, changeColor] = useState("#e5e5e5");
 
+  const withouSidebarRoutes = ["/site"];
+  const { pathname } = useLocation();
+  if (withouSidebarRoutes.some((item) => pathname.includes(item)))
+  return null;
+  
   const logout = () => {
     setUser(null);
   };
@@ -15,7 +21,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <h1>Radu's Todo List</h1>
-      <div className="links">
+      <div style={{ background: color }} className="links">
         {/* we use Link component instead of anchor tag 'a' and 'to' instead of 'href' */}
         {!user && (
           <Link
@@ -48,6 +54,7 @@ const Navbar = () => {
             className={activeLink === "site-link" ? "active" : ""}
             onClick={() => {
               setActiveLink("site-link");
+              changeColor("#FFF")
             }}
             to="/site"
           >

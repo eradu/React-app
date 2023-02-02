@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"; // import react Component
-import { Route, Routes , useLocation} from "react-router-dom"; //import react-router
+import { Route, Routes } from "react-router-dom"; //import react-router
 
 import ToDoList from "./components/ToDoList"; // import components in parent component
 import Navbar from "./components/Navbar";
@@ -20,9 +20,9 @@ import "./Styles/Mobile.scss";
 const url = "http://localhost:1234/api/user";
 
 function App() {
-  const [user, setUser] = useState("");
-  //added useEfect to check if the user exist; if exist we set the user id as data.user.id from context and add the username as "Already logged in, not having username"
-  //if user not exist we redirect to login
+  const [user, setUser] = useState('');
+//added useEfect to check if the user exist; if exist we set the user id as data.user.id from context and add the username as "Already logged in, not having username"
+//if user not exist we redirect to login
   useEffect(() => {
     fetch(url, {
       method: "GET",
@@ -44,13 +44,15 @@ function App() {
         }
       });
   }, []);
-  const location = useLocation();
-  console.log(location)
+  // const location = useLocation();
+  // console.log(location)
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <div className="App">
-      {window.location.pathname !== 'site' && <Navbar />}
-        <h3>Hello {user ? user.username : ""}</h3>
+        
+      {/* {window.location.pathname !== 'site' && <Navbar />} */}
+      <Navbar />
+      {/* <h3>Hello {user ? user.username : ""}</h3>   */}
         <div className="app-inner">
           <Routes>
             {/* to use routes in version 6 of react router we put first the Route component, then use 'exact' keyword to specifi the exact path for this route, then we specify the 'path' for the route and then specifi the component for this route*/}
