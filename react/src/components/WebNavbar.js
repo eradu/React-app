@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import MenuItems from "./MenuItems";
+import { menuItems } from "../menuItems";
 
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
@@ -9,10 +11,12 @@ import { IoShuffle } from "react-icons/io5";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { CiSearch } from "react-icons/ci";
 import { FiChevronRight } from "react-icons/fi";
-import { FiChevronDown } from "react-icons/fi";
+import { TfiWorld } from "react-icons/tfi";
 import { FiPhone } from "react-icons/fi";
 import { HiOutlineClock } from "react-icons/hi2";
 import { HiOutlineEnvelope } from "react-icons/hi2";
+import { SlUser } from "react-icons/sl";
+
 
 // import logo from "../img/logo.png";
 
@@ -244,195 +248,34 @@ const WebNavbar = () => {
                     <a href="/">
                       <span>Select Category</span>
                     </a>
-                    <div className="select-dropdown">
-                      <div className="select-dropdown-inner">
-                        <ul className="sub-menu">
-                          <li className="cat-item">
-                            <a href="/cat">Select Category</a>
-                          </li>
-                          <li className="cat-item">
-                            <a href="/cat/comp">Computers</a>
-                            <ul className="children">
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Accesosories</span>
-                                </Link>
-                              </li>
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Desktops</span>
-                                </Link>
-                              </li>
-                              <li classname="cat-item">
-                                <Link to="/">
-                                  <span>Monitors</span>
-                                </Link>
-                              </li>
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Notebooks</span>
-                                </Link>
-                              </li>
-                            </ul>
-                          </li>
-                          <li className="cat-item">
-                            <a href="/cat/comp">Mobile</a>
-                            <ul className="children">
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Cases</span>
-                                </Link>
-                              </li>
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Phones</span>
-                                </Link>
-                              </li>
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Tablets</span>
-                                </Link>
-                              </li>
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Trackers</span>
-                                </Link>
-                              </li>
-                            </ul>
-                          </li>
-                          <li className="cat-item">
-                            <a href="/cat/comp">Appliances</a>
-                            <ul className="children">
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Air Purifiers</span>
-                                </Link>
-                              </li>
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Blenders</span>
-                                </Link>
-                              </li>
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Kettles</span>
-                                </Link>
-                              </li>
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Shavers</span>
-                                </Link>
-                              </li>
-                            </ul>
-                          </li>
-                          <li className="cat-item">
-                            <a href="/cat/comp">Photo</a>
-                            <ul className="children">
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Camera Lemses</span>
-                                </Link>
-                              </li>
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Cameras</span>
-                                </Link>
-                              </li>
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Tripods</span>
-                                </Link>
-                              </li>
-                            </ul>
-                          </li>
-                          <li className="cat-item">
-                            <a href="/cat/comp">Video</a>
-                            <ul className="children">
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Media Players</span>
-                                </Link>
-                              </li>
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Controllers</span>
-                                </Link>
-                              </li>
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Consoles</span>
-                                </Link>
-                              </li>
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Projectors</span>
-                                </Link>
-                              </li>
-                            </ul>
-                          </li>
-                          <li className="cat-item">
-                            <a href="/cat/comp">Audio</a>
-                            <ul className="children">
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Headsets</span>
-                                </Link>
-                              </li>
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Music</span>
-                                </Link>
-                              </li>
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Headphones</span>
-                                </Link>
-                              </li>
-                              <li className="cat-item">
-                                <Link to="/">
-                                  <span>Microphones</span>
-                                </Link>
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
+  
                   </div>
                 </div>
               </form>
             </div>
             <div className="nav-links">
-              <ul className="navbar-menu">
-                <li className="navbar-menu-items"><Link to="/">
-                                  <span>Home</span>
-                                </Link></li>
-                <li className="navbar-menu-items"><Link to="/">
-                                  <span>Shop</span>
-                                </Link></li>
-                <li className="navbar-menu-items"><Link to="/">
-                                  <span>Blog</span>
-                                </Link></li>
-                <li className="navbar-menu-items"><Link to="/">
-                                  <span>Elements</span>
-                                </Link></li>
-                <li className="navbar-menu-items"><Link to="/">
-                                  <span>Pages</span>
-                                </Link></li>
+
+              <ul className="menus">
+                {
+                  menuItems.map((menu, index) => {
+                    const depthLevel = 0;
+                    return <MenuItems items = {menu} key = {index} depthLevel = {depthLevel} />
+                  })
+                }
               </ul>
             </div>
           </div>
           <div className="right">
             <div className="info">
-              <div className="info-icon"></div>
-              <div className="info-test">
+              <div className="info-icon"><TfiWorld/></div>
+              <div className="info-text">
                 <h4>Worldwide</h4>
                 <p>Free Shiping</p>
               </div>
             </div>
             <div className="info">
-              <div className="info-icon"></div>
-              <div className="info-test">
+              <div className="info-icon"><SlUser/></div>
+              <div className="info-text">
                 <h4>24 Support</h4>
                 <p>+1 212-334-0212</p>
               </div>
