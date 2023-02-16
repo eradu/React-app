@@ -59,7 +59,7 @@ const MenuItems = ({items, depthLevel}) => {
                     /> 
             </>
           ) : ( <div className="submenu-items">
-                  <span> { items.img }</span>
+                  <span> < img src = { items.src } alt="img"/> </span>
                   <span> { items.text }</span>
                   <a href = "/#" > { items.title }</a> 
                  

@@ -1,3 +1,4 @@
+
 export const menuItems = [
   {
     title: "Home",
@@ -6,25 +7,25 @@ export const menuItems = [
       {
         title: "Home #1",
         url: "home#1",
-        img: "./img/menu-item-home.png",
+        src: "../public/img/menu-item-home.png",
         text: "Lorem ipsum dolor sit 1",
       },
       {
         title: "Home #2",
         url: "home#2",
-        img: "./img/menu-item-home.png",
+        src: "../public/img/menu-item-home.png",
         text: "Lorem ipsum dolor sit 2",
       },
       {
         title: "Home #3",
         url: "home#3",
-        img: "./img/menu-item-home.png",
+        img: "../public/img/menu-item-home.png",
         text: "Lorem ipsum dolor sit 3",
       },
       {
         title: "Home #4",
         url: "home#4",
-        img: "./img/menu-item-home.png",
+        img: "../public/img/menu-item-home.png",
         text: "Lorem ipsum dolor sit 4",
       },
     ],

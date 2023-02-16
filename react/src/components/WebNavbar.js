@@ -16,6 +16,8 @@ import { FiPhone } from "react-icons/fi";
 import { HiOutlineClock } from "react-icons/hi2";
 import { HiOutlineEnvelope } from "react-icons/hi2";
 import { SlUser } from "react-icons/sl";
+import { RxCaretDown } from "react-icons/rx";
+import { BsSearch } from "react-icons/bs"
 
 
 // import logo from "../img/logo.png";
@@ -242,11 +244,13 @@ const WebNavbar = () => {
             <div className="form">
               <form action="" method="get">
                 <div className="search-input">
+                <BsSearch/>
                   <input type="text" placeholder="Search for products" />
                   <div className="search-select">
                     <input type="hidden" name="" />
                     <a href="/">
                       <span>Select Category</span>
+                      <RxCaretDown/>
                     </a>
   
                   </div>
