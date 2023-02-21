@@ -4,7 +4,6 @@
 .slider-section {
   position: relative;
   min-height: 750px;
-  display: flex;
   margin-top: -30px;
 
   .inner-section {
@@ -15,11 +14,10 @@
     .slide-section {
       position: relative;
       min-height: 750px;
-      display: flex;
-      justify-content: center;
       align-items: center;
       margin-left: 50px;
       padding: 10px;
+      flex-grow: 1;
 
       .right-arrow {
         position: absolute;
@@ -39,7 +37,7 @@
 
       .slide {
         img {
-          width: 750px;
+          width: 100%;
           height: 750px;
           object-fit: cover;
         }
@@ -66,7 +64,7 @@
           }
 
           p.description {
-            font-family: "Asap-Font",Arial,Helvetica,sans-serif;
+            font-family: "Asap-Font", Arial, Helvetica, sans-serif;
             max-width: 400px;
             margin: 0 auto;
             color: rgba(255, 255, 255, .6);
@@ -103,6 +101,7 @@
       display: flex;
       flex-direction: column;
       padding: 10px;
+      flex-grow: 1;
 
       .upper-group-images-section {
         display: flex;
@@ -113,25 +112,25 @@
         .video-image {
           // padding: 0 10px 0 10px;
           position: relative;
-          
-          .overlay {
-            width: 305px;
-            height: 365px;
-            position: absolute;
-            background: #000;
-            top: 0;
-            right: 0;
-            opacity: 0.1;
-          }
+
+          // .overlay {
+          //   // width: 305px;
+          //   // height: 365px;
+          //   // position: absolute;
+          //   // background: #000;
+          //   // top: 0;
+          //   // right: 0;
+          //   // opacity: 0.1;
+          // }
 
           .video-control {
-            width: 80px;
-            height: 80px;
+            width: 74px;
+            height: 74px;
             background: #fff;
             border-radius: 50%;
             position: absolute;
-            top: 39%;
-            left: 39%;
+            top: 38%;
+            left: 38%;
           }
 
           svg {
@@ -145,9 +144,10 @@
 
 
           img {
-            width:316px;
+            width: 100%;
             height: 365px;
             object-fit: cover;
+            padding: 0 10px;
           }
 
         }
@@ -157,7 +157,7 @@
           padding: 0 10px 0 10px;
 
           img {
-            width: 370px;
+            width: 100%;
             height: 365px;
             object-fit: cover;
           }
@@ -204,7 +204,7 @@
           padding: 10px;
 
           img {
-            width: 702px;
+            width: 100%;
             height: 365px;
             object-fit: cover;
           }
@@ -223,7 +223,7 @@
               }
 
               p.description {
-                font-family: "Asap-Font",Arial,Helvetica,sans-serif;
+                font-family: "Asap-Font", Arial, Helvetica, sans-serif;
                 max-width: 400px;
                 text-align: left;
                 color: rgba(255, 255, 255, 0.6);
@@ -247,6 +247,43 @@
       }
     }
   }
+}
 
+@media only screen and (max-width: 1024px) {
+  .slider-section {
+    margin-top: 45px;
+
+    .inner-section {
+      flex-direction: column;
+
+      .slide-section {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .slider-section {
+    margin-top: 45px;
+    .inner-section .images-section .upper-group-images-section {
+      flex-direction: column;
+  
+      .video-image {
+        width: 100%;
+        margin-bottom: 10px;
+  
+        .video-control {
+          top: 40%;
+          left: 46%;
+        }
+      }
+  
+      .text-image {
+        width: 100%;
+      }
+    }
+
+  }
 
 }

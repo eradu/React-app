@@ -1,0 +1,68 @@
+@import "../Variables/Variables.scss";
+@import "./base";
+
+.service-section {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1400px;
+
+  .service {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+
+
+    .service-item {
+      padding: 10px;
+
+      .service-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        color: #242424;
+        font-weight: 500;
+
+        .service-icon {
+          min-width: 75px;
+          height: 75px;
+          border: 1px solid var(--grey-background-color);
+          border-radius: 50%;
+          margin-right: 20px;
+
+          &:hover {
+            border: 1px solid var(--green);;
+          }
+        }
+
+        .service-title {
+          font-size: 18px;
+          font-family: "Asap-Font", Arial, Helvetica, sans-serif;
+          color: var(--dark-grey-background);
+          margin-bottom: 10px;
+        }
+
+        .service-text {
+          color: var(--grey-background);
+        }
+      }    
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .service {
+    flex-wrap: wrap;
+    .service-item {
+      width: 50%;
+      display: flex;
+  }}
+}
+
+@media only screen and (max-width: 767px) {
+  .service .service-item {
+    width: 100%;
+
+  }
+}

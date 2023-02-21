@@ -8,6 +8,7 @@ import WebSlider from './WebSlider';
 function WebFirstSection() {
   return (
     <section className='slider-section'>
+      <div className="container-slider">
         <div className="inner-section">
         <WebSlider/>
         <div className="images-section">
@@ -16,8 +17,9 @@ function WebFirstSection() {
               
               <img width="340" height="340" src="https://space.xtemos.com/demo/hitek/wp-content/uploads/sites/23/2020/01/vega-banner-bg-1.jpg" alt="" loading="lazy"  sizes="(max-width: 340px) 100vw, 340px"/>
               <div className="overlay">
-                <div className='video-control'><BsCaretRight/></div>
+                
               </div>
+              <div className='video-control'><BsCaretRight/></div>
             </div>
             <div className="text-image">
               <img width="450" height="340" src="https://space.xtemos.com/demo/hitek/wp-content/uploads/sites/23/2020/01/vega-banner-bg-2.jpg" alt="" loading="lazy"  sizes="(max-width: 450px) 100vw, 450px"/>
@@ -56,6 +58,7 @@ function WebFirstSection() {
           </div>
         </div>
         </div>
+      </div>
       </section>
   )
 }

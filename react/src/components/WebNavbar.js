@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import MenuItems from "./MenuItems";
-import { menuItems } from "../menuItems";
+import { menuItems } from "../data/menus/menuItems";
 
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
